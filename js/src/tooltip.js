@@ -683,16 +683,16 @@ class Tooltip extends BaseComponent {
   }
 
   _getDelegateConfig() {
+    const keysWithDifferentValues = Object.keys(this._config).filter(key => this.constructor.Default[key] !== this._config[key])
     const config = {}
 
-    if (this._config) {
-      for (const key in this._config) {
-        if (this.constructor.Default[key] !== this._config[key]) {
-          config[key] = this._config[key]
-        }
-      }
-    }
+    keysWithDifferentValues.forEach(key => {
+      config[key] = this._config[key]
+    })
 
+    // In future, can be replaced with
+    // const keysWithDifferentValues = Object.entries(this._config).filter(entry => this.constructor.Default[entry[0]] !== this._config[entry[0]])
+    // `Object.fromEntries(keysWithDifferentValues)`
     return config
   }
 

@@ -38,7 +38,7 @@ class FocusTrap {
   activate() {
     const { trapElement, autofocus } = this._config
 
-    if (!trapElement || this._isActive) {
+    if (this._isActive) {
       return
     }
 

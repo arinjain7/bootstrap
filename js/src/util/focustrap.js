@@ -6,7 +6,8 @@
  */
 
 import EventHandler from '../dom/event-handler'
-import { typeCheckConfig, focusableChildren } from './index'
+import SelectorEngine from '../dom/selector-engine'
+import { typeCheckConfig } from './index'
 
 const Default = {
   trapElement: null, // The element to trap focus inside of
@@ -76,7 +77,7 @@ class FocusTrap {
       return
     }
 
-    const elements = focusableChildren(trapElement)
+    const elements = SelectorEngine.focusableChildren(trapElement)
 
     if (elements.length === 0) {
       trapElement.focus()

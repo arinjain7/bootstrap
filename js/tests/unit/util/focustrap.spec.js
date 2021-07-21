@@ -1,5 +1,6 @@
 import FocusTrap from '../../../src/util/focustrap'
 import EventHandler from '../../../src/dom/event-handler'
+import SelectorEngine from '../../../src/dom/selector-engine'
 import { clearFixture, getFixture, createEvent } from '../../helpers/fixture'
 
 describe('FocusTrap', () => {
@@ -61,6 +62,7 @@ describe('FocusTrap', () => {
       }
 
       spyOn(inside, 'focus')
+      spyOn(SelectorEngine, 'focusableChildren').and.callFake(() => [inside])
 
       document.addEventListener('focusin', focusInListener)
 
@@ -87,7 +89,11 @@ describe('FocusTrap', () => {
       focustrap.activate()
 
       const first = document.getElementById('first')
+      const inside = document.getElementById('inside')
+      const last = document.getElementById('last')
       const outside = document.getElementById('outside')
+
+      spyOn(SelectorEngine, 'focusableChildren').and.callFake(() => [first, inside, last])
 
       first.addEventListener('focusin', done)
 
@@ -112,8 +118,12 @@ describe('FocusTrap', () => {
       const focustrap = new FocusTrap({ trapElement })
       focustrap.activate()
 
+      const first = document.getElementById('first')
+      const inside = document.getElementById('inside')
       const last = document.getElementById('last')
       const outside = document.getElementById('outside')
+
+      spyOn(SelectorEngine, 'focusableChildren').and.callFake(() => [first, inside, last])
 
       last.addEventListener('focusin', done)
 

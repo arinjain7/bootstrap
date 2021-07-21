@@ -86,9 +86,7 @@ const SelectorEngine = {
       '[contenteditable="true"]'
     ].map(selector => `${selector}:not([tabindex^="-"])`).join(', ')
 
-    return this.find(focusables, element).filter(el => {
-      return !isDisabled(el) && isVisible(el)
-    })
+    return this.find(focusables, element).filter(el => !isDisabled(el) && isVisible(el))
   }
 }
 
